@@ -486,7 +486,7 @@ def create_toprow(is_img2img):
             with gr.Row():
                 skip = gr.Button('Skip', elem_id=f"{id_part}_skip")
                 interrupt = gr.Button('Interrupt', elem_id=f"{id_part}_interrupt")
-                submit = gr.Button('Generate', elem_id=f"{id_part}_generate", variant='primary')
+                submit = gr.Button('Tạo ảnh', elem_id=f"{id_part}_generate", variant='primary')
 
                 skip.click(
                     fn=lambda: shared.state.skip(),
@@ -500,7 +500,7 @@ def create_toprow(is_img2img):
                     outputs=[],
                 )
 
-            with gr.Row():
+            with gr.Row(visible=False):
                 with gr.Column(scale=1, elem_id="style_pos_col"):
                     prompt_style = gr.Dropdown(label="Style 1", elem_id=f"{id_part}_style_index", choices=[k for k, v in shared.prompt_styles.styles.items()], value=next(iter(shared.prompt_styles.styles.keys())))
                     prompt_style.save_to_config = True
@@ -631,7 +631,7 @@ Requested path was: {f}
                     if tabname != "extras":
                         save = gr.Button('Save', elem_id=f'save_{tabname}')
 
-                    buttons = parameters_copypaste.create_buttons(["img2img", "inpaint", "extras"])
+                    buttons = parameters_copypaste.create_buttons([])
                     button_id = "hidden_element" if shared.cmd_opts.hide_ui_dir_config else 'open_folder'
                     open_folder_button = gr.Button(folder_symbol, elem_id=button_id)
 
